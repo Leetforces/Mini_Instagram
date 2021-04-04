@@ -11,7 +11,7 @@ const postSchema= new mongoose.Schema({
        required:"Body must be filled."
 
    },
-   photo:{
+   photoUrl:{
        type:String,
        default:"no photo",
    },
