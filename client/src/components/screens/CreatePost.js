@@ -7,29 +7,32 @@ const CreatePost = () => {
     const [img1, setImg] = useState("");
     const [url, setUrl] = useState("");
 
-    useEffect(async() => {
+    useEffect(() => {
         if (url) {
-
-            // Create Post and send data to backend
-            try {
-                console.log("Image Url: ======>", url);
-                if (url) {
-                    const res = await createPost({
-                        title,
-                        body,
-                        photoUrl: url,
-                    });
-                    console.log("Response", res);
-                    toast.success("Create Post Successfully:)");
-                    await setUrl("");
-                    // history.push('/');
-                } else {
-                    toast.error("Image upload at https://cloudinary.com/ failed. Try Again. ");
+            const postData = async () => {
+                // Create Post and send data to backend
+                try {
+                    console.log("Image Url: ======>", url);
+                    if (url) {
+                        const res = await createPost({
+                            title,
+                            body,
+                            photoUrl: url,
+                        });
+                        console.log("Response", res);
+                        toast.success("Create Post Successfully:)");
+                        await setUrl("");
+                        // history.push('/');
+                    } else {
+                        toast.error("Image upload at https://cloudinary.com/ failed. Try Again. ");
+                    }
+                } catch (error) {
+                    console.log("Error:" + error);
+                    toast.error(error.response.data);
                 }
-            } catch (error) {
-                console.log("Error:" + error);
-                toast.error(error.response.data);
             }
+            postData();
+
         }
     }, [url])
     const uploadImg = async () => {

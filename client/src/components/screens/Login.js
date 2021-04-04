@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState,useContext} from 'react'
 import { Link } from 'react-router-dom';
 import { login } from '../../actions/auth';
 import { toast } from 'react-toastify';
+import {userContext} from '../../App';
 
 const Login = ({history}) => {
+    const {state,dispatch} =useContext(userContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const handleSubmit = async (event) => {
@@ -16,6 +18,10 @@ const Login = ({history}) => {
             console.log("Response", res);
             toast.success("Login Success :)");
             console.log(res.data);
+            dispatch({
+                type:"LOGIN_USER",
+                payload:res.data.user,
+            })
             localStorage.setItem("jwt",res.data.token);
             localStorage.setItem("user",JSON.stringify(res.data.user));
             
@@ -39,7 +45,7 @@ const Login = ({history}) => {
 
                     />
                     <input
-                        type="text"
+                        type="password"
                         placeholder="Enter your Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}

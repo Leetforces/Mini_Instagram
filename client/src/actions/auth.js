@@ -24,6 +24,24 @@ export const createPost = async (data) => {
     });
    return res;
 }
+export const getAllPost = async () => {
+    const token=localStorage.getItem("jwt");
+    const res = await axios.get(`${process.env.REACT_APP_API}/allPost`,{
+        headers: {
+            authorization: token,
+        }
+    });
+   return res;
+}
+export const getMyPost = async () => {
+    const token=localStorage.getItem("jwt");
+    const res = await axios.get(`${process.env.REACT_APP_API}/myPost`,{
+        headers: {
+            authorization: token,
+        }
+    });
+   return res;
+}
 //update user in local storage
 // export const updateUserInLocalStorage =(user,next)=>{
 //     if(window.localStorage.getItem('auth')){

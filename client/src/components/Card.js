@@ -1,19 +1,20 @@
 import React from 'react'
 
-const Card = () => {
+const Card = (props) => {
+    props=props.value;
     return (
         <div className="myHome">
             <div className="card myHomeCard">
-                <h5>Manish</h5>
+                <h5>{props.postedBy.name}</h5>
                 <div className="card-image">
-                    <img src="https://images.unsplash.com/photo-1507187632231-5beb21a654a2?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mzl8fHdhbGxwYXBlcnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="" />
+                    <img src={props.photoUrl} alt="" />
                 </div>
                 <div className="card-content">
-                    <h6>Title</h6>
-                    <p>About Post</p>
+                    <h6>{props.title}</h6>
+                    <p>{props.body}</p>
                     <input type="text" placeholder="Comment" />
                 </div>
-                <i className="material-icons myRed">Favorite</i>
+                <i className="material-icons myRed">favorite</i>
                 
             </div>
         </div>
