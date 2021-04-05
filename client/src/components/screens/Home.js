@@ -23,6 +23,8 @@ const Home = () => {
                         <Card
                             value={item}
                             key={item._id}
+                            data={data}
+                            setData={setData}
                         />
                     )
                 })
