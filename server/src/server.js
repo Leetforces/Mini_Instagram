@@ -23,8 +23,10 @@ require("./database/db");
 // router middleware
 const routerAuth =  require('./routes/auth');
 const postRoutes=require('./routes/post');
+const userRoutes= require('./routes/user');
 app.use('/api',routerAuth);
 app.use('/api',postRoutes);
+app.use('/api',userRoutes);
 
 
 

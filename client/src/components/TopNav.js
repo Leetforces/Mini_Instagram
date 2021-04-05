@@ -17,7 +17,7 @@ const TopNav = () => {
         <>
             <nav >
                 <div className="nav-wrapper white colorBlack" >
-                    <Link to={state ? "/" : "/login"} className="brand-logo colorBlack">Instagram</Link>
+                    <Link to={state ? "/" : "/login"} className="brand-logo colorBlack">MiniInsta</Link>
                     <ul id="nav-mobile" className="right ">
                         {
                             (state === null) && (

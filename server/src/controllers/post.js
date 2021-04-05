@@ -1,6 +1,4 @@
-import { compareSync, decodeBase64 } from 'bcryptjs';
 import Post from '../models/post';
-
 export const getAllPost = async (req, res) => {
     try {
         const result = await Post.find().populate("postedBy", "_id name").populate("comments.postedBy", "_id name").exec();
@@ -56,7 +54,7 @@ export const incLike = async (req, res) => {
         console.log("ID From incLike========>", postId);
         const user = await Post.findByIdAndUpdate({ _id: postId }, {
             $push: { likes: req._id }
-        }, { new: true}).populate("comments.postedBy", "_id name").exec();
+        }, { new: true }).populate("comments.postedBy", "_id name").exec();
 
         console.log("Like SuccessFully");
         console.log("USER=======>", user);
@@ -86,20 +84,20 @@ export const disLike = async (req, res) => {
     }
 }
 export const insertComment = async (req, res) => {
-    const postId=req.body.postId;
-    const comment={
+    const postId = req.body.postId;
+    const comment = {
         text: req.body.text,
         postedBy: req._id,
     }
-    console.log("POSTID in insertComment:========>",postId);
-    console.log("Comment in insertComment:========>",comment);
+    console.log("POSTID in insertComment:========>", postId);
+    console.log("Comment in insertComment:========>", comment);
     try {
-        
+
 
         const user = await Post.findByIdAndUpdate({ _id: postId }, {
             $push: { comments: comment }
-        }, { new: true, useFindAndModify: false, }).populate("comments.postedBy", "_id name").populate("postedBy","_id name").exec();
-        console.log("User=============>",user);
+        }, { new: true, useFindAndModify: false, }).populate("comments.postedBy", "_id name").populate("postedBy", "_id name").exec();
+        console.log("User=============>", user);
         return res.json({
             user,
         });
@@ -108,23 +106,23 @@ export const insertComment = async (req, res) => {
         return res.status(422).json({ error: err });
     }
 }
-export const deletePost= async (req, res) => {
-    const postId=req.params.postId;
-    console.log("Post id in deleteinsert===========>",postId);
+export const deletePost = async (req, res) => {
+    const postId = req.params.postId;
+    console.log("Post id in deleteinsert===========>", postId);
     try {
-        const post=await Post.findOne({_id:postId}).populate("postedBy","_id").exec();
-        if(!post){
+        const post = await Post.findOne({ _id: postId }).populate("postedBy", "_id").exec();
+        if (!post) {
             return res.send("Post Not Found");
         }
-        else{
-            if(post.postedBy._id.toString()===req._id.toString()){
-               const data=await post.remove();
-               console.log("resPonse from deleltePost===========>",data);
-               res.json({result:data});
+        else {
+            if (post.postedBy._id.toString() === req._id.toString()) {
+                const data = await post.remove();
+                console.log("resPonse from deleltePost===========>", data);
+                res.json({ result: data });
             }
         }
 
-       
+
     } catch (err) {
         console.log(err);
         return res.status(422).json({ error: err });

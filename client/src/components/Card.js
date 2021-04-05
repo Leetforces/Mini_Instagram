@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { incLikePost, disLikePost, postComment,deletePost } from '../actions/auth';
+import { incLikePost, disLikePost, postComment, deletePost } from '../actions/auth';
 import { userContext } from '../App';
+import { Link } from 'react-router-dom';
 const Card = (props) => {
     const data = props.data;
     const setData = props.setData;
@@ -11,7 +12,7 @@ const Card = (props) => {
     const [textComment, setComment] = useState("");
     // const [noOfLikes, setNoOfLike] = useState(props.likes.length);
     // const [likesArray, setLikesArray] = useState(props.likes);
-    
+
 
 
     const likePost = async (id) => {
@@ -20,7 +21,7 @@ const Card = (props) => {
             // setNoOfLike(res.data.user.likes.length);
 
             const newData = data.map((item) => {
-                if (item._id == res.data.user._id) {
+                if (item._id === res.data.user._id) {
                     return res.data.user;
                 }
                 else {
@@ -41,7 +42,7 @@ const Card = (props) => {
             // setLikesArray(res.data.user.likes);
             // setNoOfLike(res.data.user.likes.length);
             const newData = data.map((item) => {
-                if (item._id == res.data.user._id) {
+                if (item._id === res.data.user._id) {
                     return res.data.user;
                 }
                 else {
@@ -57,11 +58,11 @@ const Card = (props) => {
     const makeComment = async (id) => {
         try {
             const res = await postComment({ id, textComment });
-            console.log("Comment REsponse=====>",res)
+            console.log("Comment REsponse=====>", res)
             // setLikesArray(res.data.user.likes);
             // setNoOfLike(res.data.user.likes.length);
             const newData = data.map((item) => {
-                if (item._id == res.data.user._id) {
+                if (item._id === res.data.user._id) {
                     return res.data.user;
                 }
                 else {
@@ -71,13 +72,13 @@ const Card = (props) => {
             setData(newData);
             console.log("Make Comment", res);
         } catch (err) {
-            console.log("Error in card Comment",err);
+            console.log("Error in card Comment", err);
         }
     }
-    const deletePost1 = async(postId)=>{
+    const deletePost1 = async (postId) => {
         try {
             const res = await deletePost(postId);
-            console.log("Delete Response=====>",res)
+            console.log("Delete Response=====>", res)
             // setLikesArray(res.data.user.likes);
             // setNoOfLike(res.data.user.likes.length);
             const newData = data.filter((item) => {
@@ -87,10 +88,10 @@ const Card = (props) => {
 
             setData(newData);
         } catch (err) {
-            console.log("Error in card Comment",err);
+            console.log("Error in card Comment", err);
         }
     }
-    const handleSubmitComment = async(e) => {
+    const handleSubmitComment = async (e) => {
         e.preventDefault();
         console.log("Post Comment");
         await makeComment(props._id);
@@ -98,7 +99,7 @@ const Card = (props) => {
     return (
         <div className="myHome">
             <div className="card myHomeCard">
-                <h5>{props.postedBy.name}  {(state._id===props.postedBy._id) && (<i onClick={() => { deletePost1(props._id) }} className="material-icons " style={{float:"right",}}>delete</i>)}</h5>
+                <h5><Link to={(state._id !== props.postedBy._id) ? ("/profile/" + props.postedBy._id) : ("/profile")}>{props.postedBy.name}</Link> {(state._id === props.postedBy._id) && (<i onClick={() => { deletePost1(props._id) }} className="material-icons " style={{ float: "right", }}>delete</i>)}</h5>
                 <div className="card-image">
                     <img src={props.photoUrl} alt="" />
                 </div>
@@ -114,25 +115,25 @@ const Card = (props) => {
                     {/* <h6>{noOfLikes  } Likes</h6> */}
                     <h6>{props.title}</h6>
                     <p>{props.body}</p>
-                    
+
                     {
-                        props.comments.map((record)=>{
+                        props.comments.map((record) => {
                             return (
                                 <>
-                                <h6><span><b>{record.postedBy.name}</b></span> {record.text}</h6>
+                                    <h6 ><span><b>{record.postedBy.name}</b></span> {record.text}</h6>
                                 </>
                             )
                         })
                     }
 
-                    <div class="row">
-                        <div class="col s10">
+                    <div className="row">
+                        <div className="col s10">
                             <input onChange={(e) => { setComment(e.target.value); }} type="text" value={textComment} placeholder="Comment" />
                         </div>
-                        <div class="col s2">
+                        <div className="col s2">
                             <div className="myPadding">
                                 <button onClick={(e) => handleSubmitComment(e)} disabled={!textComment} className="btn waves-effect waves-light white" style={{ color: "black" }}>
-                                    <i class="material-icons">comment</i> </button>
+                                    <i className="material-icons">comment</i> </button>
                             </div>
                         </div>
 

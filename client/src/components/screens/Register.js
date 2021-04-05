@@ -29,7 +29,7 @@ const Register = ({ history }) => {
         <>
             <div className="myCard">
                 <div className="card myAuthCard">
-                    <h1 className="brand-logo">Instagram Register</h1>
+                    <h1 className="brand-logo">MiniInsta Register</h1>
                     <input
                         type="text"
                         placeholder="Enter your Name"

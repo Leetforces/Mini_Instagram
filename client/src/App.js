@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/screens/Login';
 import Register from './components/screens/Register';
 import Profile from './components/screens/Profile';
+import UserProfile from './components/screens/UserProfile';
 import Home from './components/screens/Home';
 import CreatePost from './components/screens/CreatePost';
 
@@ -42,6 +43,7 @@ const Routing = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/profile" component={Profile} />
+        <Route exact path="/profile/:userId" component={UserProfile} />
         <Route exact path="/createpost" component={CreatePost} />
       </Switch>
     </>

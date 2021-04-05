@@ -1,5 +1,6 @@
 import  mongoose from 'mongoose';
 const {Schema} =mongoose;
+const {ObjectId} =mongoose.Schema.Types;
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
 
@@ -27,6 +28,14 @@ const userSchema= new Schema({
         type: String,
         required: true,
     },
+    followers:[{
+        type:ObjectId,
+        ref:"User",
+    }],
+    following:[{
+        type:ObjectId,
+        ref:"User",
+    }],
     
 },{timestamps:true});
 

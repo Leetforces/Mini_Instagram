@@ -36,7 +36,7 @@ const Login = ({history}) => {
         <>
             <div className="myCard">
                 <div className="card myAuthCard">
-                    <h1 className="brand-logo">Instagram Login</h1>
+                    <h1 className="brand-logo">MiniInsta Login</h1>
                     <input
                         type="text"
                         placeholder="Enter your Email"
