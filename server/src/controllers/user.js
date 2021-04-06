@@ -57,3 +57,17 @@ export const unFollow = async (req, res) => {
         res.status(422).json({ error: err });
     }
 }
+export const updatePic = async (req, res) => {
+    const id=req._id;
+    try {
+        const user = await User.findByIdAndUpdate(id, {
+            $set:{picUrl:req.body.picUrl},
+        }, { new: true }).select("-password");
+        
+       res.json(user);
+      
+    } catch (err) {
+        console.log("Error in Update Profile Picture:", err);
+        res.status(422).json({ error: err });
+    }
+}

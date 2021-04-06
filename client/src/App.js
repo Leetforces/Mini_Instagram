@@ -12,6 +12,7 @@ import Profile from './components/screens/Profile';
 import UserProfile from './components/screens/UserProfile';
 import Home from './components/screens/Home';
 import CreatePost from './components/screens/CreatePost';
+import FollowingUser from './components/screens/FollowingUser';
 
 import TopNav from './components/TopNav'
 
@@ -45,6 +46,7 @@ const Routing = () => {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/profile/:userId" component={UserProfile} />
         <Route exact path="/createpost" component={CreatePost} />
+        <Route exact path="/allFollowingPost" component={FollowingUser} />
       </Switch>
     </>
   )

@@ -17,8 +17,9 @@ const TopNav = () => {
         <>
             <nav >
                 <div className="nav-wrapper white colorBlack" >
-                    <Link to={state ? "/" : "/login"} className="brand-logo colorBlack">MiniInsta</Link>
-                    <ul id="nav-mobile" className="right ">
+                   <div style={{display:"flext", justifyContent:"space-around"}} >
+                       <Link to={state ? "/" : "/login"} className="brand-logo colorBlack left" >MiniInsta</Link>
+                    <ul id="nav-mobile" className="right">
                         {
                             (state === null) && (
                                 <>
@@ -31,6 +32,7 @@ const TopNav = () => {
                             (state !== null) && (
                                 <>
                                     <li><Link to="/createpost" className="colorBlack">Create Post</Link></li>
+                                    <li><Link to="/allFollowingPost" className="colorBlack">Following Post</Link></li>
                                     <li><Link to="/profile" className="colorBlack">Profile</Link></li>
                                     <li><button onClick={logout} className="btn waves-effect waves-light white" style={{color:"black"}}>Logout</button></li>
                                 </>
@@ -39,6 +41,7 @@ const TopNav = () => {
 
 
                     </ul>
+                   </div>
                 </div>
             </nav>
 

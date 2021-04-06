@@ -36,6 +36,10 @@ const userSchema= new Schema({
         type:ObjectId,
         ref:"User",
     }],
+    picUrl:{
+        type:String,
+        default:"https://st3.depositphotos.com/3581215/18899/v/600/depositphotos_188994514-stock-illustration-vector-illustration-male-silhouette-profile.jpg",
+    }
     
 },{timestamps:true});
 

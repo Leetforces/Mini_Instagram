@@ -72,7 +72,7 @@ const UserProfile = () => {
         const getProfile = async (userId) => {
             try {
                 const res = await getProfileOfGivenId(userId);
-                console.log("Res.data=============>", res.data);
+                console.log("Get Profile For given Id DAta =============>", res.data);
                 await setUserProfileData(res.data);
             } catch (err) {
                 console.log(err);
@@ -81,7 +81,6 @@ const UserProfile = () => {
 
         //call async function
         getProfile(userId);
-        console.log("userProfileData=============>", userProfileData);
     }, []);   //[] for 1 time Execute otherwise it go call infinite 
     return (
         <>
@@ -91,7 +90,7 @@ const UserProfile = () => {
                         <div style={{ maxWidth: "850px", margin: "0px auto" }}>
                             <div className="myProfile">
                                 <div>
-                                    <img src="https://source.unsplash.com/user/erondu/1600x900" alt="PhotoImg" className="myImg" />
+                                    <img src={userProfileData.user.picUrl} alt="PhotoImg" className="myImg" />
                                 </div>
                                 <div>
                                     <h4>{userProfileData.user.name}</h4>

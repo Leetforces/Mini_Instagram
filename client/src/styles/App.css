@@ -73,3 +73,7 @@
   padding: 20px;
   text-align: center;
 }
+
+.material-icons:hover{
+  cursor: pointer;
+}

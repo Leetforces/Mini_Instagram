@@ -1,30 +1,30 @@
-import User  from '../models/user';
+import User from '../models/user';
 import jwt from 'jsonwebtoken';
 
-export const protectedRoute =async (req,res)=>{
-   res.send("Protected Page");
+export const protectedRoute = async (req, res) => {
+    res.send("Protected Page");
 }
 export const register = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body.data;
+    console.log("UESR DAta============>", req.body);
     if (!name) return res.status(400).send("Name is Required");
     if (!password || password.length < 6) return res.status(400).send("Password is required with length 6 or more.");
-
     let userExist = await User.findOne({ email }).exec();
     if (userExist) return res.status(400).send("Email is Taken.");
 
     try {
-        const user = new User(req.body);
+        const user = new User(req.body.data);
         await user.save();
         return res.json({ OK: true })
 
     } catch (error) {
         console.log(error);
-        return res.status(400).send("Error. Try Again.");
+        return res.status(400).send("May be Invalid Details. Error. Try Again.");
     }
 };
 
 
-export  const login = async (req, res) => {
+export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
         let user = await User.findOne({ email }).exec();
@@ -36,18 +36,21 @@ export  const login = async (req, res) => {
             }
 
             // GENERATE A TOKEN THEN SEND AS RESPOSNSE TO CLIENT
-            let token=jwt.sign({_id: user._id},process.env.JWT_SECRET,{
+            let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
                 expiresIn: '1d',
             });
 
-            return res.json({token,user:{
-                _id:user._id,
-                name: user.name,
-                email: user.email,
-                createdAt: user.createdAt,
-                updatedAt: user.updatedAt,
+            return res.json({
+                token, user: {
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    createdAt: user.createdAt,
+                    updatedAt: user.updatedAt,
+                    picUrl: user.picUrl,
 
-            }}); 
+                }
+            });
             // console.log("LOGIN SUCCESSFUL:)");
             // return res.status(200).send("Login Successful:)");
         })

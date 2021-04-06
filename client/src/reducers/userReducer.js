@@ -11,5 +11,11 @@ export const userReducer = (state,action)=>{
             following:action.payload.following,
         }
     }
+    else if(action.type==="UPDATEPIC"){
+        return {
+            ...state,
+            picUrl:action.payload.picUrl,
+        }
+    }
     return state;
 }

@@ -33,6 +33,15 @@ export const getAllPost = async () => {
     });
     return res;
 }
+export const getAllFollowingPost = async () => {
+    const token = localStorage.getItem("jwt");
+    const res = await axios.get(`${process.env.REACT_APP_API}/allFollowingPost`, {
+        headers: {
+            authorization: token,
+        }
+    });
+    return res;
+}
 export const getMyPost = async () => {
     const token = localStorage.getItem("jwt");
     const res = await axios.get(`${process.env.REACT_APP_API}/myPost`, {

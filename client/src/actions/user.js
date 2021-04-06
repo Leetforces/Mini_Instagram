@@ -32,3 +32,13 @@ export const unFollow = async (unFollowId) => {
     });
     return res;
 }
+export const updatePicInDatabase = async (picUrl) => {
+    const token = localStorage.getItem("jwt");
+
+    const res = await axios.put(`${process.env.REACT_APP_API}/updatePic`,{picUrl} ,{
+        headers: {
+            authorization: token,
+        }
+    });
+    return res;
+}
