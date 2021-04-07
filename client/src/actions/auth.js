@@ -2,22 +2,22 @@ import axios from 'axios';
 
 export const register = async (user) => {
     console.log(process.env.REACT_APP_API);
-    const res = await axios.post(`${process.env.REACT_APP_API}/register`, user);
+    const res = await axios.post(`/api/register`, user);
     return res;
 }
 export const login = async (user) => {
-    const res = await axios.post(`${process.env.REACT_APP_API}/login`, user);
+    const res = await axios.post(`/api/login`, user);
     return res;
 }
 
 export const uploadImage = async (data) => {
-    const res = await axios.post(process.env.REACT_APP_IMAGE_API, data);
+    const res = await axios.post('https://api.cloudinary.com/v1_1/jadavpur-university/image/upload', data);
     return res;
 }
 
 export const createPost = async (data) => {
     const token = localStorage.getItem("jwt");
-    const res = await axios.post(`${process.env.REACT_APP_API}/createPost`, data, {
+    const res = await axios.post(`/api/createPost`, data, {
         headers: {
             authorization: token,
         }
@@ -26,7 +26,7 @@ export const createPost = async (data) => {
 }
 export const getAllPost = async () => {
     const token = localStorage.getItem("jwt");
-    const res = await axios.get(`${process.env.REACT_APP_API}/allPost`, {
+    const res = await axios.get(`/api/allPost`, {
         headers: {
             authorization: token,
         }
@@ -35,7 +35,7 @@ export const getAllPost = async () => {
 }
 export const getAllFollowingPost = async () => {
     const token = localStorage.getItem("jwt");
-    const res = await axios.get(`${process.env.REACT_APP_API}/allFollowingPost`, {
+    const res = await axios.get(`/api/allFollowingPost`, {
         headers: {
             authorization: token,
         }
@@ -44,7 +44,7 @@ export const getAllFollowingPost = async () => {
 }
 export const getMyPost = async () => {
     const token = localStorage.getItem("jwt");
-    const res = await axios.get(`${process.env.REACT_APP_API}/myPost`, {
+    const res = await axios.get(`/api/myPost`, {
         headers: {
             authorization: token,
         }
@@ -53,7 +53,7 @@ export const getMyPost = async () => {
 }
 export const incLikePost = async (id) => {
     const token = localStorage.getItem("jwt");
-    const res = await axios.put(`${process.env.REACT_APP_API}/like`,{id,}, {
+    const res = await axios.put(`/api/like`, { id, }, {
         headers: {
             authorization: token,
         }
@@ -62,7 +62,7 @@ export const incLikePost = async (id) => {
 }
 export const disLikePost = async (id) => {
     const token = localStorage.getItem("jwt");
-    const res = await axios.put(`${process.env.REACT_APP_API}/dislike`, {id,},{
+    const res = await axios.put(`/api/dislike`, { id, }, {
         headers: {
             authorization: token,
         }
@@ -71,7 +71,7 @@ export const disLikePost = async (id) => {
 }
 export const postComment = async (data) => {
     const token = localStorage.getItem("jwt");
-    const res = await axios.put(`${process.env.REACT_APP_API}/comment`, {postId:data.id,text:data.textComment},{
+    const res = await axios.put(`/api/comment`, { postId: data.id, text: data.textComment }, {
         headers: {
             authorization: token,
         }
@@ -80,11 +80,11 @@ export const postComment = async (data) => {
 }
 export const deletePost = async (postId) => {
     const token = localStorage.getItem("jwt");
-    const res = await axios.delete(`${process.env.REACT_APP_API}/deletePost/${postId}`,{
+    const res = await axios.delete(`/api/deletePost/${postId}`, {
         headers: {
             authorization: token,
         },
-        postId:postId,
+        postId: postId,
     });
     return res;
 }

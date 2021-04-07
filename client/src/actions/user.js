@@ -4,7 +4,7 @@ export const getProfileOfGivenId = async (userId) => {
     const token = localStorage.getItem("jwt");
 
     //for params there is no body
-    const res = await axios.get(`${process.env.REACT_APP_API}/profile/${userId}` ,{
+    const res = await axios.get(`/api/profile/${userId}` ,{
         headers: {
             authorization: token,
         }
@@ -15,7 +15,7 @@ export const follow = async (followId) => {
     console.log("Follow Id=======>",followId);
     const token = localStorage.getItem("jwt");
 
-    const res = await axios.put(`${process.env.REACT_APP_API}/follow`,{followId} ,{
+    const res = await axios.put(`/api/follow`,{followId} ,{
         headers: {
             authorization: token,
         }
@@ -25,7 +25,7 @@ export const follow = async (followId) => {
 export const unFollow = async (unFollowId) => {
     const token = localStorage.getItem("jwt");
 
-    const res = await axios.put(`${process.env.REACT_APP_API}/unfollow`,{unFollowId} ,{
+    const res = await axios.put(`/api/unfollow`,{unFollowId} ,{
         headers: {
             authorization: token,
         }
@@ -35,7 +35,7 @@ export const unFollow = async (unFollowId) => {
 export const updatePicInDatabase = async (picUrl) => {
     const token = localStorage.getItem("jwt");
 
-    const res = await axios.put(`${process.env.REACT_APP_API}/updatePic`,{picUrl} ,{
+    const res = await axios.put(`/api/updatePic`,{picUrl} ,{
         headers: {
             authorization: token,
         }
