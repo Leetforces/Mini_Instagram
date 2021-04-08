@@ -28,7 +28,10 @@ const Login = ({history}) => {
             history.push('/');
         } catch (error) {
             console.log("Error:" + error);
-            if (error.response.status === 400) toast.error(error.response.data)
+            if (error.response && error.response.status === 400) toast.error(error.response.data)
+            else{
+                toast.error("Error Try Again.");
+            }
         }
 
     }

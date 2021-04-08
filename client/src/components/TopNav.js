@@ -25,6 +25,7 @@ const TopNav = () => {
                                 <>
                                     <li><Link to="register" className="colorBlack">Register</Link></li>
                                     <li><Link to="/login" className="colorBlack">Login</Link></li>
+                                    <li><Link to="/reset" className="colorBlack">Reset Password</Link></li>
                                 </>
                             )
                         }

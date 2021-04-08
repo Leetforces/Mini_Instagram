@@ -9,6 +9,11 @@ export const login = async (user) => {
     const res = await axios.post(`/api/login`, user);
     return res;
 }
+export const resetPassword = async (email) => {
+    const token = localStorage.getItem("jwt");
+    const res = await axios.post(`/api/resetPassword`,{email});
+    return res;
+}
 
 export const uploadImage = async (data) => {
     const res = await axios.post('https://api.cloudinary.com/v1_1/jadavpur-university/image/upload', data);
@@ -75,6 +80,13 @@ export const postComment = async (data) => {
         headers: {
             authorization: token,
         }
+    });
+    return res;
+}
+export const changePassword = async (password,token) => {
+    const res = await axios.post(`/api/updatePassword`,{
+        password,
+        token,
     });
     return res;
 }

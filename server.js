@@ -29,17 +29,17 @@ app.use('/api',postRoutes);
 app.use('/api',userRoutes);
 
 
-if(process.env.NODE_ENV==='production'){
-    //serve static file
-    app.use(express.static("client/build"));
+// if(process.env.NODE_ENV==='production'){
+//     //serve static file
+//     app.use(express.static("client/build"));
 
-    const path= require('path');
+//     const path= require('path');
 
-    //for any other request that is not in routes
-    app.get("*",(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-    })
-}
+//     //for any other request that is not in routes
+//     app.get("*",(req,res)=>{
+//         res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+//     })
+// }
 
 
 
