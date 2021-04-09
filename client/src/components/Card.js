@@ -99,7 +99,12 @@ const Card = (props) => {
     return (
         <div className="myHome">
             <div className="card myHomeCard">
-                <h5><Link to={(state._id !== props.postedBy._id) ? ("/profile/" + props.postedBy._id) : ("/profile")}>{props.postedBy.name}</Link> {(state._id === props.postedBy._id) && (<i onClick={() => { deletePost1(props._id) }} className="material-icons " style={{ float: "right", }}>delete</i>)}</h5>
+                <h5>
+                    <Link to={(state._id !== props.postedBy._id) ? ("/profile/" + props.postedBy._id) : ("/profile")}>{props.postedBy.name}</Link>
+                    
+                    {(state._id === props.postedBy._id)
+                        && (<i onClick={() => { deletePost1(props._id) }} className="material-icons " style={{ float: "right", }}>delete</i>)}
+                </h5>
                 <div className="card-image">
                     <img src={props.photoUrl} alt="" />
                 </div>

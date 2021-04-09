@@ -2,7 +2,11 @@ import Post from '../models/post';
 import User from '../models/user';
 export const getAllPost = async (req, res) => {
     try {
-        const result = await Post.find().populate("postedBy", "_id name").populate("comments.postedBy", "_id name").exec();
+        const result = await Post.find()
+            .populate("postedBy", "_id name")
+            .populate("comments.postedBy", "_id name")
+            .sort('-createdAt')
+            .exec();
         res.json({
             data: result,
         })
@@ -14,12 +18,16 @@ export const getAllPost = async (req, res) => {
     }
 }
 export const getAllFollowingPost = async (req, res) => {
-    const id=req._id;
-    console.log("USERID in GETAllFollowing Post:",id);
+    const id = req._id;
+    console.log("USERID in GETAllFollowing Post:", id);
     try {
-        const user=await User.findOne({_id:id});
-        const result = await Post.find({postedBy:{$in:user.following}}).populate("postedBy", "_id name").populate("comments.postedBy", "_id name").exec();
-        console.log("Result in allfollowingPost",result);
+        const user = await User.findOne({ _id: id });
+        const result = await Post.find({ postedBy: { $in: user.following } })
+            .populate("postedBy", "_id name")
+            .populate("comments.postedBy", "_id name")
+            .sort('-createdAt')
+            .exec();
+        console.log("Result in allfollowingPost", result);
         res.json({
             data: result,
         })
@@ -30,10 +38,15 @@ export const getAllFollowingPost = async (req, res) => {
         });
     }
 }
+
 export const getMyPost = async (req, res) => {
     try {
         console.log("ID: ", req._id);
-        const result = await Post.find({ postedBy: req._id }).populate("postedBy", "_id name").exec();
+        const result = await Post.find({ postedBy: req._id })
+            .populate("postedBy", "_id name")
+            .sort('-createdAt')
+            .exec();
+
         res.json({
             data: result,
         })

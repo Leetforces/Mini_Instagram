@@ -42,3 +42,13 @@ export const updatePicInDatabase = async (picUrl) => {
     });
     return res;
 }
+export const searchUser = async (query) => {
+    const token = localStorage.getItem("jwt");
+
+    const res = await axios.post(`/api/search`,{query} ,{
+        headers: {
+            authorization: token,
+        }
+    });
+    return res;
+}

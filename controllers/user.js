@@ -1,12 +1,16 @@
 import User from '../models/user';
 import Post from '../models/post';
+import { resetPassword } from '../client/src/actions/auth';
 
 export const allPostForGivenId = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.params.userId }).select("-password");
         console.log("USER in allPostForgivenId======>", user);
         if (user) {
-            const post = await Post.find({ postedBy: req.params.userId }).populate("postedBy", "_id name").exec();
+            const post = await Post.find({ postedBy: req.params.userId })
+            .populate("postedBy", "_id name")
+            .sort('-createdAt')
+            .exec();
             console.log("USER=========>", post)
             res.json({ user, post });
         }
@@ -68,6 +72,19 @@ export const updatePic = async (req, res) => {
       
     } catch (err) {
         console.log("Error in Update Profile Picture:", err);
+        res.status(422).json({ error: err });
+    }
+}
+export const searchUser = async (req, res) => {
+    
+    try {
+        let userPattern=new RegExp("^"+req.body.query);
+        console.log("USER PATTERN=====>",userPattern);
+        const data=await User.find({name:{$regex:userPattern}}).select("_id name");
+
+        res.send({user:data});
+    } catch (err) {
+        console.log("Error in fecthing data:", err);
         res.status(422).json({ error: err });
     }
 }

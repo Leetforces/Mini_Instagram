@@ -36,7 +36,7 @@ const Routing = () => {
       console.log(user);
     } else {
       if(!(history.location.pathname.startsWith('/reset') )){
-        // history.push("/login");
+        history.push("/login");
       }
     }
     console.log("SSSSSSState====>", state);
