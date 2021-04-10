@@ -125,7 +125,7 @@ const Card = (props) => {
                         props.comments.map((record) => {
                             return (
                                 <>
-                                    <h6 ><span><b>{record.postedBy.name}</b></span> {record.text}</h6>
+                                    <h6 ><span><Link to={("/profile/" + record.postedBy._id)}><b>{record.postedBy.name}</b></Link></span> {record.text}</h6>
                                 </>
                             )
                         })
